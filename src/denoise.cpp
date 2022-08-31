@@ -38,8 +38,8 @@
 #include "rnnoise.h"
 #include "pitch.h"
 #include "arch.h"
-#include "rnn.h"
-#include "rnn_data.h"
+#include "nnet.h"
+#include "nnet_data.h"
 
 #define FRAME_SIZE_SHIFT 2
 #define FRAME_SIZE (120<<FRAME_SIZE_SHIFT)

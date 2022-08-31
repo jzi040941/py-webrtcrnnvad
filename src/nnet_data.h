@@ -4,37 +4,30 @@
 #include "nnet.h"
 
 typedef struct RNNModel {
-  const DenseLayer *fc;
+  int input_dense_size;
+  const DenseLayer *input_dense;
 
-  const Conv1DLayer *conv1;
-  
-  const Conv1DLayer *conv2;
-  
-  const GRULayer *gru1;
+  int vad_gru_size;
+  const GRULayer *vad_gru;
 
-  const GRULayer *gru2;
+  int noise_gru_size;
+  const GRULayer *noise_gru;
 
-  const GRULayer *gru3;
+  int denoise_gru_size;
+  const GRULayer *denoise_gru;
 
-  const GRULayer *gru_gb;
+  int denoise_output_size;
+  const DenseLayer *denoise_output;
 
-  const GRULayer *gru_rb;
-
-  const DenseLayer *fc_gb;
-
-  const DenseLayer *fc_rb;
+  int vad_output_size;
+  const DenseLayer *vad_output;
 }RNNModel;
 
 typedef struct RNNState {
   const RNNModel *model;
-  float *first_conv1d_state;
-  float *second_conv1d_state;
-  float *gru1_state;
-  float *gru2_state;
-  float *gru3_state;
-  float *gb_gru_state;
-  float *rb_gru_state;
-  float convout_buf[CONV_DIM*3];
+  float *vad_gru_state;
+  float *noise_gru_state;
+  float *denoise_gru_state;
 } RNNState;
 
 
