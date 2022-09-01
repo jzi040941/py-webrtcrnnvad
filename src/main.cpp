@@ -27,7 +27,7 @@ int main(int argc, char **argv)
   float x[FRAME_SIZE];
   FILE *f1, *fout;
   DenoiseState *st;
-  st = rnnoise_create(NULL);
+  st = rnnoise_create();
   if (argc!=3) {
     fprintf(stderr, "usage: %s <noisy speech> <output denoised>\n", argv[0]);
     return 1;
@@ -52,6 +52,8 @@ PYBIND11_MODULE(py_webrtcrnnvad, m) {
            add
            subtract
     )pbdoc";
+
+    py::class_<DenoiseState>(m, "DenoiseState");
 
     m.def("rnnoise_create", &rnnoise_create, R"pbdoc(
         Create noiseState instance

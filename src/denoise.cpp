@@ -209,7 +209,7 @@ int rnnoise_get_frame_size() {
   return FRAME_SIZE;
 }
 
-int rnnoise_init(DenoiseState *st, RNNModel *model) {
+int rnnoise_init(DenoiseState *st) {
   memset(st, 0, sizeof(*st));
   // else
   //  st->rnn.model = &rnnoise_model_orig;
@@ -218,10 +218,10 @@ int rnnoise_init(DenoiseState *st, RNNModel *model) {
   return 0;
 }
 
-DenoiseState *rnnoise_create(RNNModel *model) {
+DenoiseState *rnnoise_create() {
   DenoiseState *st;
   st = (DenoiseState *)malloc(rnnoise_get_size());
-  rnnoise_init(st, model);
+  rnnoise_init(st);
   return st;
 }
 
