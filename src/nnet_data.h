@@ -10,15 +10,6 @@ typedef struct RNNModel {
   int vad_gru_size;
   const GRULayer *vad_gru;
 
-  int noise_gru_size;
-  const GRULayer *noise_gru;
-
-  int denoise_gru_size;
-  const GRULayer *denoise_gru;
-
-  int denoise_output_size;
-  const DenseLayer *denoise_output;
-
   int vad_output_size;
   const DenseLayer *vad_output;
 }RNNModel;

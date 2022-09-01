@@ -7,7 +7,7 @@
 #include "nnet.h"
 #include "nnet_data.h"
 
-static const short input_dense_weights[1008] = {
+static const rnn_weight input_dense_weights[1008] = {
    -10, 0, -3, 1, -8, -6, 3, -13,
    1, 0, -3, -7, -5, -3, 6, -1,
    -6, 0, -6, -4, -1, -2, 1, 1,
@@ -136,7 +136,7 @@ static const short input_dense_weights[1008] = {
    14, 6, 9, 26, 25, -25, -25, -18
 };
 
-static const short input_dense_bias[24] = {
+static const rnn_weight input_dense_bias[24] = {
    38, -6, 127, 127, 127, -43, -127, 78,
    127, 5, 127, 123, 127, 127, -128, -76,
    -126, 28, 127, 125, -30, 127, -89, -20
@@ -148,7 +148,7 @@ static const DenseLayer input_dense = {
    42, 24, ACTIVATION_TANH
 };
 
-static const short vad_gru_weights[1728] = {
+static const rnn_weight vad_gru_weights[1728] = {
    -124, 23, -123, -33, -95, -4, 8, -84,
    4, 101, -119, 116, -4, 123, 103, -51,
    29, -124, -114, -49, 31, 9, 75, -128,
@@ -367,7 +367,7 @@ static const short vad_gru_weights[1728] = {
    -6, -17, 4, -111, -52, 27, 65, 0
 };
 
-static const short vad_gru_recurrent_weights[1728] = {
+static const rnn_weight vad_gru_recurrent_weights[1728] = {
    65, 83, 35, 56, 24, -34, -28, -2,
    125, 19, 42, -9, 124, -53, 24, -87,
    11, 35, -81, -35, -125, -31, 123, -21,
@@ -586,7 +586,7 @@ static const short vad_gru_recurrent_weights[1728] = {
    -73, 127, -8, -80, 46, -48, 4, -54
 };
 
-static const short vad_gru_bias[72] = {
+static const rnn_weight vad_gru_bias[72] = {
    124, 125, -57, -126, 53, 123, 127, -75,
    68, 102, -2, 116, 124, 127, 124, 125,
    126, 123, -16, 48, 125, 126, 78, 85,
@@ -603,4 +603,31 @@ static const GRULayer vad_gru = {
    vad_gru_weights,
    vad_gru_recurrent_weights,
    24, 24, ACTIVATION_RELU
+};
+
+static const rnn_weight vad_output_weights[24] = {
+   127, 127, 127, 127, 127, 20, 127, -126,
+   -126, -54, 14, 125, -126, -126, 127, -125,
+   -126, 127, -127, -127, -57, -30, 127, 80
+};
+
+static const rnn_weight vad_output_bias[1] = {
+   -50
+};
+
+static const DenseLayer vad_output = {
+   vad_output_bias,
+   vad_output_weights,
+   24, 1, ACTIVATION_SIGMOID
+};
+
+extern const struct RNNModel rnnoise_model_orig = {
+    24,
+    &input_dense,
+
+    24,
+    &vad_gru,
+
+    1,
+    &vad_output
 };

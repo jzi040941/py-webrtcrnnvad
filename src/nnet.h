@@ -29,8 +29,7 @@
 #define _NNET_H_
 
 #define WEIGHTS_SCALE (1.f/256)
-#define MAX_NEURONS 512
-#define MAX_CONV_INPUTS 1536
+#define MAX_NEURONS 128
 
 #define ACTIVATION_LINEAR  0
 #define ACTIVATION_SIGMOID 1
@@ -38,82 +37,32 @@
 #define ACTIVATION_RELU    3
 #define ACTIVATION_SOFTMAX 4
 
-#define INPUT_SIZE 70
-#define CONV_DIM 512
-#define CONVOUT_BUF_SIZE CONV_DIM*3
+#define INPUT_SIZE 42
+typedef signed char rnn_weight;
+
 typedef struct {
-  const float *bias;
-  const float *input_weights;
+  const rnn_weight *bias;
+  const rnn_weight *input_weights;
   int nb_inputs;
   int nb_neurons;
   int activation;
 } DenseLayer;
 
 typedef struct {
-  const float *bias;
-  const float *input_weights;
-  const float *factor;
-  int nb_inputs;
-  int nb_neurons;
-  int nb_channels;
-  int activation;
-} MDenseLayer;
-
-typedef struct {
-  const float *bias;
-  const float *input_weights;
-  const float *recurrent_weights;
+  const rnn_weight *bias;
+  const rnn_weight *input_weights;
+  const rnn_weight *recurrent_weights;
   int nb_inputs;
   int nb_neurons;
   int activation;
-  int reset_after;
 } GRULayer;
 
-typedef struct {
-  const float *bias;
-  const float *diag_weights;
-  const float *recurrent_weights;
-  const int *idx;
-  int nb_neurons;
-  int activation;
-  int reset_after;
-} SparseGRULayer;
-
-typedef struct {
-  const float *bias;
-  const float *input_weights;
-  int nb_inputs;
-  int kernel_size;
-  int nb_neurons;
-  int activation;
-} Conv1DLayer;
-
-typedef struct {
-  const float *embedding_weights;
-  int nb_inputs;
-  int dim;
-} EmbeddingLayer;
-
-void compute_activation(float *output, float *input, int N, int activation);
+typedef struct RNNState RNNState;
 
 void compute_dense(const DenseLayer *layer, float *output, const float *input);
 
-void compute_mdense(const MDenseLayer *layer, float *output, const float *input);
-
 void compute_gru(const GRULayer *gru, float *state, const float *input);
 
-void compute_gru2(const GRULayer *gru, float *state, const float *input);
-
-void compute_gru3(const GRULayer *gru, float *state, const float *input);
-
-void compute_sparse_gru(const SparseGRULayer *gru, float *state, const float *input);
-
-void compute_conv1d(const Conv1DLayer *layer, float *output, float *mem, const float *input);
-
-void compute_embedding(const EmbeddingLayer *layer, float *output, int input);
-
-void accum_embedding(const EmbeddingLayer *layer, float *output, int input);
-
-int sample_from_pdf(const float *pdf, int N, float exp_boost, float pdf_floor);
+void compute_rnn(RNNState *rnn, float *vad, const float *input);
 
 #endif /* _MLP_H_ */

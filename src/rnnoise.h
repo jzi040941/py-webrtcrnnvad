@@ -46,7 +46,39 @@
 # endif
 #endif
 
-typedef struct DenoiseState DenoiseState;
+#define FRAME_SIZE_SHIFT 2
+#define FRAME_SIZE (120<<FRAME_SIZE_SHIFT)
+#define WINDOW_SIZE (2*FRAME_SIZE)
+#define FREQ_SIZE (FRAME_SIZE + 1)
+
+#define PITCH_MIN_PERIOD 60
+#define PITCH_MAX_PERIOD 768
+#define PITCH_FRAME_SIZE 960
+#define PITCH_BUF_SIZE (PITCH_MAX_PERIOD+PITCH_FRAME_SIZE)
+
+#define SQUARE(x) ((x)*(x))
+
+#define NB_BANDS 22
+
+#define CEPS_MEM 8
+#define NB_DELTA_CEPS 6
+
+#define NB_FEATURES (NB_BANDS+3*NB_DELTA_CEPS+2)
+
+typedef struct DenoiseState {
+  float analysis_mem[FRAME_SIZE];
+  float cepstral_mem[CEPS_MEM][NB_BANDS];
+  int memid;
+  float synthesis_mem[FRAME_SIZE];
+  float pitch_buf[PITCH_BUF_SIZE];
+  float pitch_enh_buf[PITCH_BUF_SIZE];
+  float last_gain;
+  int last_period;
+  float mem_hp_x[2];
+  float lastg[NB_BANDS];
+  RNNState rnn;
+} DenoiseState;
+
 typedef struct RNNModel RNNModel;
 
 RNNOISE_EXPORT int rnnoise_get_size();
@@ -57,7 +89,7 @@ RNNOISE_EXPORT DenoiseState *rnnoise_create(RNNModel *model);
 
 RNNOISE_EXPORT void rnnoise_destroy(DenoiseState *st);
 
-RNNOISE_EXPORT float rnnoise_process_frame(DenoiseState *st, float *out, const float *in);
+RNNOISE_EXPORT float rnnoise_process_frame(DenoiseState *st, const float *in);
 
 RNNOISE_EXPORT RNNModel *rnnoise_model_from_file(FILE *f);
 

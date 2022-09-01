@@ -9,7 +9,10 @@ include_directories(src)
 add_subdirectory(src)
 
 add_subdirectory(pybind11)
-pybind11_add_module(py_webrtcrnnvad src/main.cpp)
+file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true src/*.h src/*.cpp)
+
+set(SOURCES ${SOURCES})
+pybind11_add_module(py_webrtcrnnvad ${SOURCES})
 
 # EXAMPLE_VERSION_INFO is defined by setup.py and passed into the C++ code as a
 # define (VERSION_INFO) here.
