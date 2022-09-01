@@ -22,9 +22,6 @@ int main(int argc, char **argv)
     train(argc, argv);
     return 0;
   }
-  int i;
-  int first = 1;
-  float x[FRAME_SIZE];
   FILE *f1, *fout;
   DenoiseState *st;
   st = rnnoise_create();
@@ -42,7 +39,7 @@ int main(int argc, char **argv)
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(py_webrtcrnnvad, m) {
+PYBIND11_MODULE(_py_webrtcrnnvad, m) {
     m.doc() = R"pbdoc(
         py_webrtcrnnvad
         -----------------------
@@ -59,7 +56,7 @@ PYBIND11_MODULE(py_webrtcrnnvad, m) {
         Create noiseState instance
     )pbdoc");
 
-    m.def("rnnoise_process_frame", &rnnoise_process_frame, R"pbdoc(
+    m.def("rnnvad_process_npframe", &rnnvad_process_npframe, R"pbdoc(
         process audio frame and returns vad prob
     )pbdoc");
 

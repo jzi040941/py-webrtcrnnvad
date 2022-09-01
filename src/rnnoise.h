@@ -31,6 +31,8 @@
 #include <stdio.h>
 #include "nnet_data.h"
 
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
 
 #ifndef RNNOISE_EXPORT
 # if defined(WIN32)
@@ -65,6 +67,8 @@
 
 #define NB_FEATURES (NB_BANDS+3*NB_DELTA_CEPS+2)
 
+namespace py = pybind11;
+
 typedef struct DenoiseState {
   float analysis_mem[FRAME_SIZE];
   float cepstral_mem[CEPS_MEM][NB_BANDS];
@@ -90,6 +94,8 @@ RNNOISE_EXPORT DenoiseState *rnnoise_create();
 RNNOISE_EXPORT void rnnoise_destroy(DenoiseState *st);
 
 RNNOISE_EXPORT float rnnoise_process_frame(DenoiseState *st, const float *in);
+
+RNNOISE_EXPORT float rnnvad_process_npframe(DenoiseState *st, py::array_t<float> in);
 
 RNNOISE_EXPORT RNNModel *rnnoise_model_from_file(FILE *f);
 

@@ -29,6 +29,11 @@
 #include "config.h"
 #endif
 
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+
+namespace py = pybind11;
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -410,6 +415,13 @@ float rnnoise_process_frame(DenoiseState *st, const float *in) {
   }
 
   return vad_prob;
+}
+
+float rnnvad_process_npframe(DenoiseState *st, py::array_t<float> in){
+  py::buffer_info buf1 = in.request();
+
+  const float *input = static_cast<float *>(buf1.ptr);
+  return rnnoise_process_frame(st, input);
 }
 
 #if TRAINING
