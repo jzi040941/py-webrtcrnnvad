@@ -127,9 +127,10 @@ setup(
     author_email="jzi004941@naver.com",
     description="Python interface to the RNNoise VAD(Voice Activity Detection) component inside webrtc",
     long_description="",
-    ext_modules=[CMakeExtension("py_webrtcrnnvad")],
+    ext_modules=[CMakeExtension("py_webrtcrnnvad._py_webrtcrnnvad")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
     extras_require={"test": ["pytest>=6.0"]},
     python_requires=">=3.6",
+    packages=['py_webrtcrnnvad']
 )
