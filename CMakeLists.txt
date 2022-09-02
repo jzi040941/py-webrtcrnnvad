@@ -3,7 +3,19 @@ project(py_webrtcrnnvad)
 
 # GoogleTest requires at least C++11
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message("using Clang")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra")
+    # using GCC
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+    message("using Intel c++")
+    # using Intel C++
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    message("using MSVC")
+    # using Visual Studio C++
+endif()
+
 
 include_directories(src)
 add_subdirectory(src)
