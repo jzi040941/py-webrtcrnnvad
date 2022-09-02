@@ -5,7 +5,7 @@ on:
   pull_request:
   push:
     branches:
-     - master
+     - main
   release:
     types:
       - published
@@ -75,4 +75,4 @@ jobs:
 
     - uses: pypa/gh-action-pypi-publish@v1.5.1
       with:
-        password: ${{ secrets.pypi_password }}
+        password: ${{ secrets.PYPI_API_TOKEN }}
