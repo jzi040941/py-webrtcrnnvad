@@ -126,7 +126,7 @@ setup(
     author="Seonghun noh",
     author_email="jzi004941@naver.com",
     description="Python interface to the RNNoise VAD(Voice Activity Detection) component inside webrtc",
-    long_description="",
+    long_description="Python interface to the RNNoise VAD(Voice Activity Detection) component inside webrtc",
     ext_modules=[CMakeExtension("py_webrtcrnnvad._py_webrtcrnnvad")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
