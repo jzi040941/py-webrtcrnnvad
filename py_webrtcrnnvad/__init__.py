@@ -1,5 +1,4 @@
 from ._py_webrtcrnnvad import *
-import numpy as np
 
 __version__ = "0.0.1"
 
@@ -11,7 +10,7 @@ class RNNVAD:
     def __init__(self):
         self.st = rnnoise_create()
     
-    def processFrame(self, frame : np.ndarray):
+    def processFrame(self, frame):
         """
         :param frame: (np.ndarray) frame of 48k audio range is -32767.0 ~ 32768.0 
         dtype is float32, frame lenghth should be 480 
