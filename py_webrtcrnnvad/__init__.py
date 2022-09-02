@@ -16,7 +16,7 @@ class RNNVAD:
         dtype is float32, frame lenghth should be 480 
         """
         assert frame.shape==(480,)
-        rnnvad_process_npframe(self.st, frame)
+        return rnnvad_process_npframe(self.st, frame)
     
     def reset(self):
         """ """
