@@ -1,6 +1,8 @@
 from ._py_webrtcrnnvad import *
 import numpy as np
 
+__version__ = "0.0.1"
+
 class RNNVAD:
     """
     This is class of WebRTC RNNVAD
