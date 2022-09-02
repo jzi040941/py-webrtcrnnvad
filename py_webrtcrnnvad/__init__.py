@@ -1,4 +1,4 @@
-from py_webrtcrnnvad._py_webrtcrnnvad import *
+from ._py_webrtcrnnvad import *
 import numpy as np
 
 class RNNVAD:
@@ -14,8 +14,7 @@ class RNNVAD:
         :param frame: (np.ndarray) frame of 48k audio range is -32767.0 ~ 32768.0 
         dtype is float32, frame lenghth should be 480 
         """
-        assert frame.shape==[1,480]
-        assert frame.dtype==np.float32
+        assert frame.shape==(480,)
         rnnvad_process_npframe(self.st, frame)
     
     def reset(self):
