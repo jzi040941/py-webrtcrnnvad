@@ -26,7 +26,7 @@ Python interface to the RNNoise VAD(Voice Activity Detection) component inside w
 ## Installation
 
 ```
-pip install py_webrtcrnnvad
+pip install py-webrtcrnnvad
 ```
 
 ## License
