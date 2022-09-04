@@ -41,8 +41,12 @@ PyBind - BSD
 ## Test call
 
 ```python
-import cmake_example
-cmake_example.add(1, 2)
+import py_webrtcrnnvad
+audio, fs = read_wave("audio.wav")
+frames = frame_generator(10, audio, 48000)
+frame = np.frombuffer(frames[0].bytes, dtype=np.short)
+vad = py_webrtcrnnvad.RNNVAD()
+vad.processFrame(frame.astype(np.float32))
 ```
 
 [`cibuildwheel`]:          https://cibuildwheel.readthedocs.io
