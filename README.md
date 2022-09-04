@@ -11,13 +11,10 @@ Python interface to the RNNoise VAD(Voice Activity Detection) component inside w
 
 [gitter-badge]:            https://badges.gitter.im/pybind/Lobby.svg
 [gitter-link]:             https://gitter.im/pybind/Lobby
-[actions-badge]:           https://github.com/pybind/cmake_example/workflows/Tests/badge.svg
-[actions-conda-link]:      https://github.com/pybind/cmake_example/actions?query=workflow%3A%22Conda
-[actions-conda-badge]:     https://github.com/pybind/cmake_example/workflows/Conda/badge.svg
-[actions-pip-link]:        https://github.com/pybind/cmake_example/actions?query=workflow%3A%22Pip
-[actions-pip-badge]:       https://github.com/pybind/cmake_example/workflows/Pip/badge.svg
-[actions-wheels-link]:     https://github.com/pybind/cmake_example/actions?query=workflow%3AWheels
-[actions-wheels-badge]:    https://github.com/pybind/cmake_example/workflows/Wheels/badge.svg
+[actions-pip-link]:        https://github.com/jzi040941/py-webrtcrnnvad/actions/workflows/pip.yml
+[actions-pip-badge]:       https://github.com/jzi040941/py-webrtcrnnvad/actions/workflows/pip.yml/badge.svg
+[actions-wheels-link]:     https://github.com/jzi040941/py-webrtcrnnvad/actions/workflows/wheels.yml
+[actions-wheels-badge]:    https://github.com/jzi040941/py-webrtcrnnvad/actions/workflows/wheels.yml/badge.svg 
 
 ## Prerequisites
 
